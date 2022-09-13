@@ -229,7 +229,7 @@ def climatic_values(nomfitxer):
 #%% MONTHLY PRECIPITATION GRAPH COMPARING ALL THE STATIONS FOR THE SAME YEAR
 
 r = np.arange(4)
-width = 0.10
+width = 0.08
 plt.style.use('ggplot')
 plt.grid(True)
 
@@ -243,7 +243,10 @@ plt.bar(r+6*width, seasonal('WC_35.csv',2021)[4], color = 'seagreen', width = wi
 plt.bar(r+7*width, seasonal('C6_35.csv',2021)[4], color = 'darkgreen', width = width, edgecolor = None, label='Castellnou de Seana')
 
 plt.ylabel("Monthly precipitation (mm)")
+plt.ylim(0,150)
 plt.title("2021")
+fig = plt.gcf()
+fig.set_size_inches(10, 6)
 plt.grid(True)
 plt.xticks(r + 3*width,seasons_names)
 plt.legend(loc = 9)
@@ -267,6 +270,44 @@ plt.bar(r+7*width, climatic_values('C6_35.csv')[4], color = 'darkgreen', width =
 
 plt.ylabel("Seasonal precipitation (mm)")
 plt.title("2010-2019")
+plt.ylim(0,150)
+fig = plt.gcf()
+fig.set_size_inches(10, 6)
 plt.grid(True)
 plt.xticks(r + 3*width,seasons_names)
 plt.legend(loc = 2)
+
+#%% SEASONAL PRECIPITATION GRAPH SUPERPOSING 2021 WITH THE OTHER TIME SERIES
+
+r = np.arange(4)
+width = 0.08
+plt.grid(True)
+plt.style.use('ggplot')
+
+
+plt.bar(r, climatic_values('WL_35.csv')[4], color = 'lightcoral', width = width, edgecolor = None, label='Sant Martí de Riucorb', alpha=0.5)
+plt.bar(r+width, climatic_values('C7_35.csv')[4], color = 'indianred', width = width, edgecolor = None, label='Tàrrega', alpha=0.5) 
+plt.bar(r+2*width, climatic_values('VD_35.csv')[4], color = 'firebrick', width = width, edgecolor = None, label='El Canós', alpha=0.5)  
+plt.bar(r+3*width,climatic_values('C8_35.csv')[4], color = 'maroon', width = width, edgecolor = None, label='Cervera', alpha=0.5)  
+plt.bar(r+4*width, climatic_values('V8_35.csv')[4], color = 'lightgreen', width = width, edgecolor = None, label='El Poal', alpha=0.5)
+plt.bar(r+5*width, climatic_values('XI_35.csv')[4], color = 'limegreen', width = width, edgecolor = None, label='Mollerussa', alpha=0.5)
+plt.bar(r+6*width, climatic_values('WC_35.csv')[4], color = 'seagreen', width = width, edgecolor = None, label='Golmés', alpha=0.5)
+plt.bar(r+7*width, climatic_values('C6_35.csv')[4], color = 'darkgreen', width = width, edgecolor = None, label='Castellnou de Seana', alpha=0.5)
+
+plt.scatter(r, seasonal('WL_35.csv',2021)[4], marker = 'o', color = 'black')
+plt.scatter(r+width, seasonal('C7_35.csv',2021)[4], marker = 'o', color ='black') 
+plt.scatter(r+2*width, seasonal('VD_35.csv',2021)[4], marker = 'o', color = 'black') 
+plt.scatter(r+3*width, seasonal('C8_35.csv',2021)[4], color = 'black', marker = 'o')
+plt.scatter(r+4*width, seasonal('V8_35.csv',2021)[4], color = 'black', marker = 'o')
+plt.scatter(r+5*width, seasonal('XI_35.csv',2021)[4], color = 'black', marker = 'o')
+plt.scatter(r+6*width, seasonal('WC_35.csv',2021)[4], color = 'black', marker = 'o')
+plt.scatter(r+7*width, seasonal('C6_35.csv',2021)[4], color = 'black', marker = 'o', label='2021')
+
+plt.ylabel("Accumulated precipitation (mm)")
+plt.title("Seasonal Precipitacion 2010-2019")
+plt.ylim(0,150)
+fig = plt.gcf()
+fig.set_size_inches(10, 6)
+plt.grid(True)
+plt.xticks(r + 3*width,seasons_names)
+plt.legend(loc = 4)

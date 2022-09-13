@@ -342,7 +342,7 @@ plt.plot(months_names,climatic_means('C7_40.csv',1),label = 'TXm 2010-2019',line
 plt.plot(months_names,campanya('C7_42.csv',2), label = 'TNm 2021',linestyle = 'solid', marker = 'o', color = 'lightcoral')
 plt.plot(months_names,climatic_means('C7_42.csv',2),label = 'TNm 2010-2019',linestyle = 'dashed', marker = 'o', color = 'lightcoral')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 
 #%% PRECIPITATION BARS 21-22 FOR A SINGLE STATION
@@ -369,7 +369,7 @@ plt.plot(months_names,campanya('XI_32.csv',0),label = 'TMm Mollerussa',linestyle
 plt.plot(months_names,campanya('XI_40.csv',1), label = 'TXm Mollerussa',linestyle = 'solid', marker = 'o', color = 'darkgreen')
 plt.plot(months_names,campanya('XI_42.csv',2),label = 'TNm Mollerussa',linestyle = 'solid', marker = 'o', color = 'lightgreen')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 
 #%% MEAN TEMPERATURE COMPARISON 21-22 FOR ALL STATIONS
@@ -386,7 +386,7 @@ plt.plot(months_names, campanya('XI_32.csv',0), linestyle = 'solid', marker = 'o
 plt.plot(months_names, campanya('WC_32.csv',0),linestyle = 'solid', marker = 'o', color = 'seagreen', label='Golmés')
 plt.plot(months_names, campanya('C6_32.csv',0),linestyle = 'solid', marker = 'o', color = 'darkgreen', label='Castellnou de Seana')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 #plt.ylim(5,35) #can be adjusted
 plt.tight_layout()
 #plt.savefig('Comparativa Temp.png', format='png', dpi=800)
@@ -405,7 +405,7 @@ plt.plot(months_names, campanya('XI_40.csv',1), linestyle = 'solid', marker = 'o
 plt.plot(months_names, campanya('WC_40.csv',1),linestyle = 'solid', marker = 'o', color = 'seagreen', label='Golmés')
 plt.plot(months_names, campanya('C6_40.csv',1),linestyle = 'solid', marker = 'o', color = 'darkgreen', label='Castellnou de Seana')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 #plt.ylim(5,35) #can be adjusted
 plt.tight_layout()
 #plt.savefig('Comparativa Temp Max.png', format='png', dpi=800)
@@ -424,7 +424,7 @@ plt.plot(months_names, campanya('XI_42.csv',2), linestyle = 'solid', marker = 'o
 plt.plot(months_names, campanya('WC_42.csv',2),linestyle = 'solid', marker = 'o', color = 'seagreen', label='Golmés')
 plt.plot(months_names, campanya('C6_42.csv',2),linestyle = 'solid', marker = 'o', color = 'darkgreen', label='Castellnou de Seana')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 #plt.ylim(5,35) #can be adjusted
 plt.tight_layout()
 #plt.savefig('Comparativa Temp Max.png', format='png', dpi=800)

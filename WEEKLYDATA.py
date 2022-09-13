@@ -100,7 +100,7 @@ def climatic_weekly_means(nomfitxer):
    
     return means
 
-#%% NOT VALIDATED 
+#%% NOT FINISHED / VALIDATED 
 def extrems(nomfitxer,year,week,select):
     """
     i wanted to generate a function that could
@@ -130,6 +130,6 @@ plt.plot(setmanes,extrems('C7_42.csv',2021,26,'min'), label = 'TNm 2021',linesty
 
 plt.legend(loc = 8)
 plt.xlabel('Weeks')
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 #plt.savefig('Weekly Tàrrega 2021.png', format='png', dpi=800)
 plt.tight_layout()

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+Created on Tue Mar 29 10:40:11 2022
+
 @author: mbalague
 """
 # LIBRARIES
@@ -238,12 +240,13 @@ def dfbp(nomfitxer):
     return df_final
 
 
-ax = dfbp('XI_32.csv').boxplot(column=['VALOR_LECTURA'], by ='Month', grid = False, showmeans = True, meanline = True)
+ax = dfbp('XI_32.csv').boxplot(column=['VALOR_LECTURA'], by ='Month', grid = False, showmeans = True, meanline = True, figsize=(8,6))
 plt.suptitle("")
-ax.plot([1,2,3,4,5,6,7,8,9,10,11,12], monthly_mean('C8_32.csv',2021),'ro', label = '2021')
+ax.plot([1,2,3,4,5,6,7,8,9,10,11,12], monthly_mean('XI_32.csv',2021),'ro', label = '2021')
+ax.set_ylim(-10,45)
 ax.set_xlabel("Months")
 ax.set_title('TMm Mollerussa 2010-2019')
-ax.set_ylabel("Temperature (ºC)")
+ax.set_ylabel("Temperature (°C)")
 ax.set_xticks(np.arange(13))
 ax.legend(loc = 'best')
 
@@ -292,12 +295,14 @@ def dfbp(nomfitxer,selection):
     df_final = pd.DataFrame(list(zip(x, y)), columns =['MONTH', 'EXTREM'])
     return df_final
 
-ax = dfbp('WL_42.csv','min').boxplot(column=['EXTREM'], by ='MONTH', grid = False, showmeans = True, meanline = True)
+ax = dfbp('C8_42.csv','min').boxplot(column=['EXTREM'], by ='MONTH', grid = False, showmeans = True, meanline = True, figsize=(8,6))
+#THE DASHED LINE INDICATES THE MONTHLY MEAN WHILE THE SOLID ONE INDICATES THE MEDIAN
 plt.suptitle("")
-ax.plot([1,2,3,4,5,6,7,8,9,10,11,12],extrems('WL_42.csv',2021,'min'),'ro', label = '2021')
+ax.plot([1,2,3,4,5,6,7,8,9,10,11,12],extrems('C8_42.csv',2021,'min'),'ro', label = '2021')
 ax.set_xlabel("Months")
-ax.set_title('TNm Sant Martí de Riucorb 2010-2019')
-ax.set_ylabel("Temperature (ºC)")
+ax.set_title('TNm Cervera 2010-2019')
+ax.set_ylim(-5,20) # for the TXm change limits to (0,35)
+ax.set_ylabel("Temperature (°C)")
 ax.set_xticks(np.arange(13))
 ax.legend(loc = 'best')
 
@@ -315,7 +320,7 @@ plt.plot(months_names,monthly_mean('C7_32.csv',2021),label = 'TMm Tàrrega',line
 plt.plot(months_names,extrems('C7_40.csv',2021,'max'), label = 'TXm Tàrrega',linestyle = 'solid', marker = 'o', color = 'maroon')
 plt.plot(months_names,extrems('C7_42.csv',2021,'min'), label = 'TNm Tàrrega',linestyle = 'solid', marker = 'o', color = 'lightcoral')
 plt.legend(loc = 'best')
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 
 #plt.savefig('Mollerusa i Tàrrega 2021.png', format='png', dpi=800)
@@ -334,12 +339,12 @@ plt.plot(months_names,climatic_means('V8_40.csv',1),label = 'TXm 2010-2019',line
 plt.plot(months_names,extrems('V8_42.csv',2021,'min'), label = 'TNm '+str(selected_year),linestyle = 'solid', marker = 'o', color = 'lightgreen')
 plt.plot(months_names,climatic_means('V8_42.csv',2),label = 'TNm 2010-2019',linestyle = 'dashed', marker = 'o', color = 'lightgreen')
 plt.legend(loc = 8)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 
 #plt.savefig('Comparativa Temp El Poal.png', format='png', dpi=800)
 
-#%% TEMPERATURE COMPARISON FOR 2021 ALL STATIONS
+#%% MEAN TEMPERATURE COMPARISON FOR 2021 ALL STATIONS
 plt.style.use('ggplot')
 plt.figure('Comparativa Temp')
 plt.grid(True)
@@ -353,7 +358,7 @@ plt.plot(months_names, monthly_mean('XI_32.csv',2021), linestyle = 'solid', mark
 plt.plot(months_names, monthly_mean('WC_32.csv',2021),linestyle = 'solid', marker = 'o', color = 'seagreen', label='Golmés')
 plt.plot(months_names, monthly_mean('C6_32.csv',2021),linestyle = 'solid', marker = 'o', color = 'darkgreen', label='Castellnou de Seana')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 #plt.ylim(5,35) #can be adjusted
 plt.tight_layout()
 #plt.savefig('Comparativa Temp.png', format='png', dpi=800)
@@ -371,7 +376,7 @@ plt.plot(months_names, extrems('XI_40.csv',2021,'max'), linestyle = 'solid', mar
 plt.plot(months_names, extrems('WC_40.csv',2021,'max'),linestyle = 'solid', marker = 'o', color = 'seagreen', label='Golmés')
 plt.plot(months_names, extrems('C6_40.csv',2021,'max'),linestyle = 'solid', marker = 'o', color = 'darkgreen', label='Castellnou de Seana')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 #plt.ylim(5,35) #can be adjusted
 plt.tight_layout()
 #plt.savefig('Comparativa Temp Max.png', format='png', dpi=800)
@@ -389,16 +394,35 @@ plt.plot(months_names, extrems('XI_42.csv',2021,'min'), linestyle = 'solid', mar
 plt.plot(months_names, extrems('WC_42.csv',2021,'min'),linestyle = 'solid', marker = 'o', color = 'seagreen', label='Golmés')
 plt.plot(months_names, extrems('C6_42.csv',2021,'min'),linestyle = 'solid', marker = 'o', color = 'darkgreen', label='Castellnou de Seana')
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 #plt.ylim(5,35) #can be adjusted
 plt.tight_layout()
 #plt.savefig('Comparativa Temp Min.png', format='png', dpi=800)
 
 #%% MAX TEMPERATURE COMPARISON 2010-2019
 plt.style.use('ggplot')
+plt.figure('Comparativa TMm')
+plt.grid(True)
+plt.title('TMm 2010-19')
+plt.plot(months_names, climatic_means('WL_32.csv',0), linestyle = 'solid', marker = 'o', color = 'lightcoral', label='Sant Martí de Riucorb')  
+plt.plot(months_names, climatic_means('C7_32.csv',0),linestyle = 'solid', marker = 'o', color = 'indianred', label='Tàrrega') 
+plt.plot(months_names, climatic_means('VD_32.csv',0),linestyle = 'solid', marker = 'o', color = 'firebrick', label='El Canós')  
+plt.plot(months_names, climatic_means('C8_32.csv',0),linestyle = 'solid', marker = 'o', color = 'maroon', label='Cervera')  
+plt.plot(months_names, climatic_means('V8_32.csv',0),linestyle = 'solid', marker = 'o', color = 'lightgreen', label='El Poal')
+plt.plot(months_names, climatic_means('XI_32.csv',0), linestyle = 'solid', marker = 'o',color = 'limegreen', label='Mollerussa')
+plt.plot(months_names, climatic_means('WC_32.csv',0),linestyle = 'solid', marker = 'o', color = 'seagreen', label='Golmés')
+plt.plot(months_names, climatic_means('C6_32.csv',0),linestyle = 'solid', marker = 'o', color = 'darkgreen', label='Castellnou de Seana')
+
+
+plt.legend(loc = 'best')
+plt.ylabel('Temperature (°C)')
+plt.tight_layout()
+#plt.savefig('Comparativa TMm.png', format='png', dpi=800)
+#%% MAX TEMPERATURE COMPARISON 2010-2019
+plt.style.use('ggplot')
 plt.figure('Comparativa TXm')
 plt.grid(True)
-plt.title('TNm 2010-19')
+plt.title('TXm 2010-19')
 plt.plot(months_names, climatic_means('WL_40.csv',1), linestyle = 'solid', marker = 'o', color = 'lightcoral', label='Sant Martí de Riucorb')  
 plt.plot(months_names, climatic_means('C7_40.csv',1),linestyle = 'solid', marker = 'o', color = 'indianred', label='Tàrrega') 
 plt.plot(months_names, climatic_means('VD_40.csv',1),linestyle = 'solid', marker = 'o', color = 'firebrick', label='El Canós')  
@@ -410,7 +434,7 @@ plt.plot(months_names, climatic_means('C6_40.csv',1),linestyle = 'solid', marker
 
 
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 #plt.savefig('Comparativa TXm.png', format='png', dpi=800)
 #%% MIN TEMPERATURE COMPARISON 2010-2019
@@ -429,23 +453,23 @@ plt.plot(months_names, climatic_means('C6_42.csv',2),linestyle = 'solid', marker
 
 
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 #plt.savefig('Comparativa TNm.png', format='png', dpi=800)
 
 
 #%% TMm DATA
 gen = np.array([])
-gen10 = monthly_mean('XI_32.csv',2010)[0]
-gen11 = monthly_mean('XI_32.csv',2011)[0]
-gen12 = monthly_mean('XI_32.csv',2012)[0]
-gen13 = monthly_mean('XI_32.csv',2013)[0]
-gen14 = monthly_mean('XI_32.csv',2014)[0]
-gen15 = monthly_mean('XI_32.csv',2015)[0]
-gen16 = monthly_mean('XI_32.csv',2016)[0]
-gen17 = monthly_mean('XI_32.csv',2017)[0]
-gen18 = monthly_mean('XI_32.csv',2018)[0]
-gen19 = monthly_mean('XI_32.csv',2019)[0]
+gen10 = monthly_mean('C7_32.csv',2010)[0]
+gen11 = monthly_mean('C7_32.csv',2011)[0]
+gen12 = monthly_mean('C7_32.csv',2012)[0]
+gen13 = monthly_mean('C7_32.csv',2013)[0]
+gen14 = monthly_mean('C7_32.csv',2014)[0]
+gen15 = monthly_mean('C7_32.csv',2015)[0]
+gen16 = monthly_mean('C7_32.csv',2016)[0]
+gen17 = monthly_mean('C7_32.csv',2017)[0]
+gen18 = monthly_mean('C7_32.csv',2018)[0]
+gen19 = monthly_mean('C7_32.csv',2019)[0]
 
 gen = np.append(gen, (gen10,gen11,gen12,gen13,gen14,gen15,gen16,gen17,gen18,gen19))
 genmax = np.max(gen)
@@ -455,16 +479,16 @@ gen50 = np.percentile(gen,50)
 gen75 = np.percentile(gen,75)
 
 feb = np.array([])
-feb10 = monthly_mean('XI_32.csv',2010)[1]
-feb11 = monthly_mean('XI_32.csv',2011)[1]
-feb12 = monthly_mean('XI_32.csv',2012)[1]
-feb13 = monthly_mean('XI_32.csv',2013)[1]
-feb14 = monthly_mean('XI_32.csv',2014)[1]
-feb15 = monthly_mean('XI_32.csv',2015)[1]
-feb16 = monthly_mean('XI_32.csv',2016)[1]
-feb17 = monthly_mean('XI_32.csv',2017)[1]
-feb18 = monthly_mean('XI_32.csv',2018)[1]
-feb19 = monthly_mean('XI_32.csv',2019)[1]
+feb10 = monthly_mean('C7_32.csv',2010)[1]
+feb11 = monthly_mean('C7_32.csv',2011)[1]
+feb12 = monthly_mean('C7_32.csv',2012)[1]
+feb13 = monthly_mean('C7_32.csv',2013)[1]
+feb14 = monthly_mean('C7_32.csv',2014)[1]
+feb15 = monthly_mean('C7_32.csv',2015)[1]
+feb16 = monthly_mean('C7_32.csv',2016)[1]
+feb17 = monthly_mean('C7_32.csv',2017)[1]
+feb18 = monthly_mean('C7_32.csv',2018)[1]
+feb19 = monthly_mean('C7_32.csv',2019)[1]
 
 feb = np.append(feb, (feb10,feb11,feb12,feb13,feb14,feb15,feb16,feb17,feb18,feb19))
 febmax = np.max(feb)
@@ -474,16 +498,16 @@ feb50 = np.percentile(feb,50)
 feb75 = np.percentile(feb,75)
 
 mar = np.array([])
-mar10 = monthly_mean('XI_32.csv',2010)[2]
-mar11 = monthly_mean('XI_32.csv',2011)[2]
-mar12 = monthly_mean('XI_32.csv',2012)[2]
-mar13 = monthly_mean('XI_32.csv',2013)[2]
-mar14 = monthly_mean('XI_32.csv',2014)[2]
-mar15 = monthly_mean('XI_32.csv',2015)[2]
-mar16 = monthly_mean('XI_32.csv',2016)[2]
-mar17 = monthly_mean('XI_32.csv',2017)[2]
-mar18 = monthly_mean('XI_32.csv',2018)[2]
-mar19 = monthly_mean('XI_32.csv',2019)[2]
+mar10 = monthly_mean('C7_32.csv',2010)[2]
+mar11 = monthly_mean('C7_32.csv',2011)[2]
+mar12 = monthly_mean('C7_32.csv',2012)[2]
+mar13 = monthly_mean('C7_32.csv',2013)[2]
+mar14 = monthly_mean('C7_32.csv',2014)[2]
+mar15 = monthly_mean('C7_32.csv',2015)[2]
+mar16 = monthly_mean('C7_32.csv',2016)[2]
+mar17 = monthly_mean('C7_32.csv',2017)[2]
+mar18 = monthly_mean('C7_32.csv',2018)[2]
+mar19 = monthly_mean('C7_32.csv',2019)[2]
 
 mar = np.append(mar, (mar10,mar11,mar12,mar13,mar14,mar15,mar16,mar17,mar18,mar19))
 marmax = np.max(mar)
@@ -493,16 +517,16 @@ mar50 = np.percentile(mar,50)
 mar75 = np.percentile(mar,75)
 
 apr = np.array([])
-apr10 = monthly_mean('XI_32.csv',2010)[3]
-apr11 = monthly_mean('XI_32.csv',2011)[3]
-apr12 = monthly_mean('XI_32.csv',2012)[3]
-apr13 = monthly_mean('XI_32.csv',2013)[3]
-apr14 = monthly_mean('XI_32.csv',2014)[3]
-apr15 = monthly_mean('XI_32.csv',2015)[3]
-apr16 = monthly_mean('XI_32.csv',2016)[3]
-apr17 = monthly_mean('XI_32.csv',2017)[3]
-apr18 = monthly_mean('XI_32.csv',2018)[3]
-apr19 = monthly_mean('XI_32.csv',2019)[3]
+apr10 = monthly_mean('C7_32.csv',2010)[3]
+apr11 = monthly_mean('C7_32.csv',2011)[3]
+apr12 = monthly_mean('C7_32.csv',2012)[3]
+apr13 = monthly_mean('C7_32.csv',2013)[3]
+apr14 = monthly_mean('C7_32.csv',2014)[3]
+apr15 = monthly_mean('C7_32.csv',2015)[3]
+apr16 = monthly_mean('C7_32.csv',2016)[3]
+apr17 = monthly_mean('C7_32.csv',2017)[3]
+apr18 = monthly_mean('C7_32.csv',2018)[3]
+apr19 = monthly_mean('C7_32.csv',2019)[3]
 
 apr = np.append(apr, (apr10,apr11,apr12,apr13,apr14,apr15,apr16,apr17,apr18,apr19))
 aprmax = np.max(apr)
@@ -512,16 +536,16 @@ apr50 = np.percentile(apr,50)
 apr75 = np.percentile(apr,75)
 
 may = np.array([])
-may10 = monthly_mean('XI_32.csv',2010)[4]
-may11 = monthly_mean('XI_32.csv',2011)[4]
-may12 = monthly_mean('XI_32.csv',2012)[4]
-may13 = monthly_mean('XI_32.csv',2013)[4]
-may14 = monthly_mean('XI_32.csv',2014)[4]
-may15 = monthly_mean('XI_32.csv',2015)[4]
-may16 = monthly_mean('XI_32.csv',2016)[4]
-may17 = monthly_mean('XI_32.csv',2017)[4]
-may18 = monthly_mean('XI_32.csv',2018)[4]
-may19 = monthly_mean('XI_32.csv',2019)[4]
+may10 = monthly_mean('C7_32.csv',2010)[4]
+may11 = monthly_mean('C7_32.csv',2011)[4]
+may12 = monthly_mean('C7_32.csv',2012)[4]
+may13 = monthly_mean('C7_32.csv',2013)[4]
+may14 = monthly_mean('C7_32.csv',2014)[4]
+may15 = monthly_mean('C7_32.csv',2015)[4]
+may16 = monthly_mean('C7_32.csv',2016)[4]
+may17 = monthly_mean('C7_32.csv',2017)[4]
+may18 = monthly_mean('C7_32.csv',2018)[4]
+may19 = monthly_mean('C7_32.csv',2019)[4]
 
 may = np.append(may, (may10,may11,may12,may13,may14,may15,may16,may17,may18,may19))
 maymax = np.max(may)
@@ -531,16 +555,16 @@ may50 = np.percentile(may,50)
 may75 = np.percentile(may,75)
 
 jun = np.array([])
-jun10 = monthly_mean('XI_32.csv',2010)[5]
-jun11 = monthly_mean('XI_32.csv',2011)[5]
-jun12 = monthly_mean('XI_32.csv',2012)[5]
-jun13 = monthly_mean('XI_32.csv',2013)[5]
-jun14 = monthly_mean('XI_32.csv',2014)[5]
-jun15 = monthly_mean('XI_32.csv',2015)[5]
-jun16 = monthly_mean('XI_32.csv',2016)[5]
-jun17 = monthly_mean('XI_32.csv',2017)[5]
-jun18 = monthly_mean('XI_32.csv',2018)[5]
-jun19 = monthly_mean('XI_32.csv',2019)[5]
+jun10 = monthly_mean('C7_32.csv',2010)[5]
+jun11 = monthly_mean('C7_32.csv',2011)[5]
+jun12 = monthly_mean('C7_32.csv',2012)[5]
+jun13 = monthly_mean('C7_32.csv',2013)[5]
+jun14 = monthly_mean('C7_32.csv',2014)[5]
+jun15 = monthly_mean('C7_32.csv',2015)[5]
+jun16 = monthly_mean('C7_32.csv',2016)[5]
+jun17 = monthly_mean('C7_32.csv',2017)[5]
+jun18 = monthly_mean('C7_32.csv',2018)[5]
+jun19 = monthly_mean('C7_32.csv',2019)[5]
 
 jun = np.append(jun, (jun10,jun11,jun12,jun13,jun14,jun15,jun16,jun17,jun18,jun19))
 junmax = np.max(jun)
@@ -550,16 +574,16 @@ jun50 = np.percentile(jun,50)
 jun75 = np.percentile(jun,75)
 
 jul = np.array([])
-jul10 = monthly_mean('XI_32.csv',2010)[6]
-jul11 = monthly_mean('XI_32.csv',2011)[6]
-jul12 = monthly_mean('XI_32.csv',2012)[6]
-jul13 = monthly_mean('XI_32.csv',2013)[6]
-jul14 = monthly_mean('XI_32.csv',2014)[6]
-jul15 = monthly_mean('XI_32.csv',2015)[6]
-jul16 = monthly_mean('XI_32.csv',2016)[6]
-jul17 = monthly_mean('XI_32.csv',2017)[6]
-jul18 = monthly_mean('XI_32.csv',2018)[6]
-jul19 = monthly_mean('XI_32.csv',2019)[6]
+jul10 = monthly_mean('C7_32.csv',2010)[6]
+jul11 = monthly_mean('C7_32.csv',2011)[6]
+jul12 = monthly_mean('C7_32.csv',2012)[6]
+jul13 = monthly_mean('C7_32.csv',2013)[6]
+jul14 = monthly_mean('C7_32.csv',2014)[6]
+jul15 = monthly_mean('C7_32.csv',2015)[6]
+jul16 = monthly_mean('C7_32.csv',2016)[6]
+jul17 = monthly_mean('C7_32.csv',2017)[6]
+jul18 = monthly_mean('C7_32.csv',2018)[6]
+jul19 = monthly_mean('C7_32.csv',2019)[6]
 
 jul = np.append(jul, (jul10,jul11,jul12,jul13,jul14,jul15,jul16,jul17,jul18,jul19))
 julmax = np.max(jul)
@@ -569,16 +593,16 @@ jul50 = np.percentile(jul,50)
 jul75 = np.percentile(jul,75)
 
 aug = np.array([])
-aug10 = monthly_mean('XI_32.csv',2010)[7]
-aug11 = monthly_mean('XI_32.csv',2011)[7]
-aug12 = monthly_mean('XI_32.csv',2012)[7]
-aug13 = monthly_mean('XI_32.csv',2013)[7]
-aug14 = monthly_mean('XI_32.csv',2014)[7]
-aug15 = monthly_mean('XI_32.csv',2015)[7]
-aug16 = monthly_mean('XI_32.csv',2016)[7]
-aug17 = monthly_mean('XI_32.csv',2017)[7]
-aug18 = monthly_mean('XI_32.csv',2018)[7]
-aug19 = monthly_mean('XI_32.csv',2019)[7]
+aug10 = monthly_mean('C7_32.csv',2010)[7]
+aug11 = monthly_mean('C7_32.csv',2011)[7]
+aug12 = monthly_mean('C7_32.csv',2012)[7]
+aug13 = monthly_mean('C7_32.csv',2013)[7]
+aug14 = monthly_mean('C7_32.csv',2014)[7]
+aug15 = monthly_mean('C7_32.csv',2015)[7]
+aug16 = monthly_mean('C7_32.csv',2016)[7]
+aug17 = monthly_mean('C7_32.csv',2017)[7]
+aug18 = monthly_mean('C7_32.csv',2018)[7]
+aug19 = monthly_mean('C7_32.csv',2019)[7]
 
 aug = np.append(aug, (aug10,aug11,aug12,aug13,aug14,aug15,aug16,aug17,aug18,aug19))
 augmax = np.max(aug)
@@ -588,16 +612,16 @@ aug50 = np.percentile(aug,50)
 aug75 = np.percentile(aug,75)
 
 sept = np.array([])
-sept10 = monthly_mean('XI_32.csv',2010)[8]
-sept11 = monthly_mean('XI_32.csv',2011)[8]
-sept12 = monthly_mean('XI_32.csv',2012)[8]
-sept13 = monthly_mean('XI_32.csv',2013)[8]
-sept14 = monthly_mean('XI_32.csv',2014)[8]
-sept15 = monthly_mean('XI_32.csv',2015)[8]
-sept16 = monthly_mean('XI_32.csv',2016)[8]
-sept17 = monthly_mean('XI_32.csv',2017)[8]
-sept18 = monthly_mean('XI_32.csv',2018)[8]
-sept19 = monthly_mean('XI_32.csv',2019)[8]
+sept10 = monthly_mean('C7_32.csv',2010)[8]
+sept11 = monthly_mean('C7_32.csv',2011)[8]
+sept12 = monthly_mean('C7_32.csv',2012)[8]
+sept13 = monthly_mean('C7_32.csv',2013)[8]
+sept14 = monthly_mean('C7_32.csv',2014)[8]
+sept15 = monthly_mean('C7_32.csv',2015)[8]
+sept16 = monthly_mean('C7_32.csv',2016)[8]
+sept17 = monthly_mean('C7_32.csv',2017)[8]
+sept18 = monthly_mean('C7_32.csv',2018)[8]
+sept19 = monthly_mean('C7_32.csv',2019)[8]
 
 sept = np.append(sept, (sept10,sept11,sept12,sept13,sept14,sept15,sept16,sept17,sept18,sept19))
 septmax = np.max(sept)
@@ -607,16 +631,16 @@ sept50 = np.percentile(sept,50)
 sept75 = np.percentile(sept,75)
 
 octo = np.array([])
-octo10 = monthly_mean('XI_32.csv',2010)[9]
-octo11 = monthly_mean('XI_32.csv',2011)[9]
-octo12 = monthly_mean('XI_32.csv',2012)[9]
-octo13 = monthly_mean('XI_32.csv',2013)[9]
-octo14 = monthly_mean('XI_32.csv',2014)[9]
-octo15 = monthly_mean('XI_32.csv',2015)[9]
-octo16 = monthly_mean('XI_32.csv',2016)[9]
-octo17 = monthly_mean('XI_32.csv',2017)[9]
-octo18 = monthly_mean('XI_32.csv',2018)[9]
-octo19 = monthly_mean('XI_32.csv',2019)[9]
+octo10 = monthly_mean('C7_32.csv',2010)[9]
+octo11 = monthly_mean('C7_32.csv',2011)[9]
+octo12 = monthly_mean('C7_32.csv',2012)[9]
+octo13 = monthly_mean('C7_32.csv',2013)[9]
+octo14 = monthly_mean('C7_32.csv',2014)[9]
+octo15 = monthly_mean('C7_32.csv',2015)[9]
+octo16 = monthly_mean('C7_32.csv',2016)[9]
+octo17 = monthly_mean('C7_32.csv',2017)[9]
+octo18 = monthly_mean('C7_32.csv',2018)[9]
+octo19 = monthly_mean('C7_32.csv',2019)[9]
 
 octo = np.append(octo, (octo10,octo11,octo12,octo13,octo14,octo15,octo16,octo17,octo18,octo19))
 octomax = np.max(octo)
@@ -626,16 +650,16 @@ octo50 = np.percentile(octo,50)
 octo75 = np.percentile(octo,75)
 
 nov = np.array([])
-nov10 = monthly_mean('XI_32.csv',2010)[10]
-nov11 = monthly_mean('XI_32.csv',2011)[10]
-nov12 = monthly_mean('XI_32.csv',2012)[10]
-nov13 = monthly_mean('XI_32.csv',2013)[10]
-nov14 = monthly_mean('XI_32.csv',2014)[10]
-nov15 = monthly_mean('XI_32.csv',2015)[10]
-nov16 = monthly_mean('XI_32.csv',2016)[10]
-nov17 = monthly_mean('XI_32.csv',2017)[10]
-nov18 = monthly_mean('XI_32.csv',2018)[10]
-nov19 = monthly_mean('XI_32.csv',2019)[10]
+nov10 = monthly_mean('C7_32.csv',2010)[10]
+nov11 = monthly_mean('C7_32.csv',2011)[10]
+nov12 = monthly_mean('C7_32.csv',2012)[10]
+nov13 = monthly_mean('C7_32.csv',2013)[10]
+nov14 = monthly_mean('C7_32.csv',2014)[10]
+nov15 = monthly_mean('C7_32.csv',2015)[10]
+nov16 = monthly_mean('C7_32.csv',2016)[10]
+nov17 = monthly_mean('C7_32.csv',2017)[10]
+nov18 = monthly_mean('C7_32.csv',2018)[10]
+nov19 = monthly_mean('C7_32.csv',2019)[10]
 
 nov = np.append(nov,(nov10,nov11,nov12,nov13,nov14,nov15,nov16,nov17,nov18,nov19))
 novmax = np.max(nov)
@@ -645,16 +669,16 @@ nov50 = np.percentile(nov,50)
 nov75 = np.percentile(nov,75)
 
 dec = np.array([])
-dec10 = monthly_mean('XI_32.csv',2010)[11]
-dec11 = monthly_mean('XI_32.csv',2011)[11]
-dec12 = monthly_mean('XI_32.csv',2012)[11]
-dec13 = monthly_mean('XI_32.csv',2013)[11]
-dec14 = monthly_mean('XI_32.csv',2014)[11]
-dec15 = monthly_mean('XI_32.csv',2015)[11]
-dec16 = monthly_mean('XI_32.csv',2016)[11]
-dec17 = monthly_mean('XI_32.csv',2017)[11]
-dec18 = monthly_mean('XI_32.csv',2018)[11]
-dec19 = monthly_mean('XI_32.csv',2019)[11]
+dec10 = monthly_mean('C7_32.csv',2010)[11]
+dec11 = monthly_mean('C7_32.csv',2011)[11]
+dec12 = monthly_mean('C7_32.csv',2012)[11]
+dec13 = monthly_mean('C7_32.csv',2013)[11]
+dec14 = monthly_mean('C7_32.csv',2014)[11]
+dec15 = monthly_mean('C7_32.csv',2015)[11]
+dec16 = monthly_mean('C7_32.csv',2016)[11]
+dec17 = monthly_mean('C7_32.csv',2017)[11]
+dec18 = monthly_mean('C7_32.csv',2018)[11]
+dec19 = monthly_mean('C7_32.csv',2019)[11]
 
 dec = np.append(dec, (dec10,dec11,dec12,dec13,dec14,dec15,dec16,dec17,dec18,dec19))
 decmax = np.max(dec)
@@ -680,19 +704,19 @@ dadesp75 = np.append(dadesp75, (gen75,feb75,mar75,apr75,may75,jun75,jul75,aug75,
 #%% TEMPERATURE GRAPH WITH SHADOW PERCENTILES
 plt.figure('TMm')
 plt.grid(True)
-plt.title('TMm Mollerussa')
+plt.title('TMm Tàrrega')
 plt.plot(months_names, dadesmax, linestyle = 'dashed', color = 'red', label='Max')  
 plt.plot(months_names, dadesmin,linestyle = 'dashed', color = 'blue', label='Min') 
 plt.plot(months_names, dadesp25, linestyle = 'solid', color = 'steelblue', label = 'P25', linewidth = 0.4)
 plt.plot(months_names, dadesp50, linestyle = 'solid', color = 'black', label = 'P50', linewidth = 1.8)
 plt.plot(months_names, dadesp75, linestyle = 'solid', color = 'salmon', label = 'P75', linewidth = 0.4)
 plt.fill_between(months_names, dadesp25, dadesp75, color = 'gainsboro')  
-plt.plot(months_names, monthly_mean('XI_32.csv',2021),linestyle = 'solid', marker = 'o', color = 'black', label='2021', linewidth = 0.85)
+plt.plot(months_names, monthly_mean('C7_32.csv',2021),linestyle = 'solid', marker = 'o', color = 'black', label='2021', linewidth = 0.85)
 
 plt.legend(loc = 1)
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
-#plt.savefig('TMm Mollerussa.png', format='png', dpi=2000)
+plt.savefig('TMm Tàrrega 21.png', format='png', dpi=800)
 
 
 #%% STATISTICS TEST

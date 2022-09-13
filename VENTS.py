@@ -96,7 +96,7 @@ plt.grid(True)
 plt.plot(select_day(select_month(select_year(read('C7_31.csv'),2021),'2021','07'), '2021','07','01')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C7_31.csv'),2021),'2021','07'), '2021','07','01')['VALOR_LECTURA'],'ro')
 plt.ylim(0,360)
 plt.xlabel('UTC')
-plt.ylabel('DV (º)')
+plt.ylabel('DV (°)')
 
 
 plt.subplot(212)
@@ -106,7 +106,7 @@ plt.grid(True)
 plt.plot(select_day(select_month(select_year(read('C6_31.csv'),2021),'2021','07'), '2021','07','01')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C6_31.csv'),2021),'2021','07'), '2021','07','01')['VALOR_LECTURA'],'go')
 plt.ylim(0,360)
 plt.xlabel('UTC')
-plt.ylabel('DV (º)')
+plt.ylabel('DV (°)')
 plt.tight_layout()
     
 
@@ -122,13 +122,14 @@ par1.set_ylim(0, 40)
 par2.set_ylim(0, 16)
     
 host.set_xlabel("UTC")
-host.set_ylabel("Wind Direction (º)")
-par1.set_ylabel("Max Temperature (ºC)")
-par2.set_ylabel("Velocity (m/s)")
+host.set_title('Tàrrega')
+host.set_ylabel("Wind Direction (°)")
+par1.set_ylabel("Temperature (°C)")
+par2.set_ylabel("Wind Speed (m/s)")
 
-p1, = host.plot(select_day(select_month(select_year(read('C7_31.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C7_31.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'], "ro", label="Wind Direction")
-p2, = par1.plot(select_day(select_month(select_year(read('C7_40.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C7_32.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'], "b-", label="Max Temperature")
-p3, = par2.plot(select_day(select_month(select_year(read('C7_30.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C7_30.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'], "k-", label="Velocity")
+p1, = host.plot(select_day(select_month(select_year(read('C7_31.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C7_31.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'], "ro", label="Wind Direction")
+p2, = par1.plot(select_day(select_month(select_year(read('C7_40.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C7_40.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'], "b-", label="Max Temperature")
+p3, = par2.plot(select_day(select_month(select_year(read('C7_30.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C7_30.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'], "k-", label="Wind Speed")
 
 lns = [p1, p2, p3]
 host.legend(handles=lns, loc='best')
@@ -144,13 +145,14 @@ par1.set_ylim(0, 40)
 par2.set_ylim(0, 16)
     
 host.set_xlabel("UTC")
-host.set_ylabel("Wind Direction (º)")
-par1.set_ylabel("Max Temperature (ºC)")
-par2.set_ylabel("Velocity (m/s)")
+host.set_title('Castellnou de Seana')
+host.set_ylabel("Wind Direction (°)")
+par1.set_ylabel("Temperature (°C)")
+par2.set_ylabel("Wind Speed (m/s)")
 
-p1, = host.plot(select_day(select_month(select_year(read('C6_31.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C6_31.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'], "go", label="Wind Direction")
-p2, = par1.plot(select_day(select_month(select_year(read('C6_40.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C6_32.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'], "b-", label="Max Temperature")
-p3, = par2.plot(select_day(select_month(select_year(read('C6_30.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C6_30.csv'),2021),'2021','07'), '2021','07','07')['VALOR_LECTURA'], "k-", label="Velocity")
+p1, = host.plot(select_day(select_month(select_year(read('C6_31.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C6_31.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'], "ro", label="Wind Direction")
+p2, = par1.plot(select_day(select_month(select_year(read('C6_40.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C6_40.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'], "b-", label="Max Temperature")
+p3, = par2.plot(select_day(select_month(select_year(read('C6_30.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'].keys(), select_day(select_month(select_year(read('C6_30.csv'),2021),'2021','07'), '2021','07','18')['VALOR_LECTURA'], "k-", label="Wind Speed")
 
 lns = [p1, p2, p3]
 host.legend(handles=lns, loc='best')

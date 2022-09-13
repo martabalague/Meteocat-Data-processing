@@ -256,12 +256,13 @@ def dfbp(nomfitxer):
     df = pd.DataFrame(list(zip(x, y)), columns =['Month', 'ACU'])
     return df
 
-ax = dfbp('C7_35.csv').boxplot(column=['ACU'], by = 'Month', grid = False, showmeans = True, meanline = True) 
+ax = dfbp('XI_35.csv').boxplot(column=['ACU'], by = 'Month', grid = False, showmeans = True, meanline = True) 
 #THE DASHED LINE INDICATES THE MONTHLY MEAN WHILE THE SOLID ONE INDICATES THE MEDIAN
 plt.suptitle("")
-ax.plot([1,2,3,4,5,6,7,8,9,10,11,12], preci('C7_35.csv',2021),'ro', label = '2021')
+ax.plot([1,2,3,4,5,6,7,8,9,10,11,12], preci('XI_35.csv',2021),'ro', label = '2021')
 ax.set_xlabel("Months")
-ax.set_title('PPT Tàrrega 2010-2019')
+ax.set_ylim(-5,150)
+ax.set_title('PPT Mollerussa 2010-2019')
 ax.set_ylabel("Precipitation (mm)")
 ax.set_xticks(np.arange(13))
 ax.legend(loc = 'best')

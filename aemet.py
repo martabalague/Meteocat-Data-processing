@@ -154,7 +154,7 @@ plt.plot(months_names,monthly_mean('manresa'),label = 'TMm Manresa',linestyle = 
 plt.plot(months_names,extrems('manresa',2021,'max'), label = 'TXm Manresa',linestyle = 'solid', marker = 'o', color = 'maroon')
 plt.plot(months_names,extrems('manresa',2021,'min'), label = 'TNm Manresa',linestyle = 'solid', marker = 'o', color = 'lightcoral')
 plt.legend(loc = 'best')
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 #plt.savefig('Dades AEMET 2021.png', format='png', dpi=800)
 
@@ -264,6 +264,6 @@ plt.plot(months_names,meteocat_extrems('XI_42.csv',2021,'min'), label = 'Molleru
 plt.plot(months_names,meteocat_extrems('C7_42.csv',2021,'min'), label = 'Tàrrega',linestyle = 'solid', marker = 'o', color = 'indianred')
 plt.plot(months_names,extrems('manresa',2021,'min'),label = 'Manresa',linestyle = 'solid', marker = 'o', color = 'darkred')
 plt.legend(loc = 'best')
-plt.ylabel('Temperature (ºC)')
+plt.ylabel('Temperature (°C)')
 plt.tight_layout()
 #plt.savefig('TNm AEMET i SMC 2021.png', format='png', dpi=800)
